@@ -1,0 +1,22 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "open-artifact-sheet",
+  "compatibility_date": "2025-09-24",
+  "compatibility_flags": ["nodejs_compat"],
+  "main": "@tanstack/react-start/server-entry",
+  "observability": { "enabled": true },
+  "vars": {
+    "MY_VAR": "Hello from Cloudflare"
+  },
+  "assets": {
+    "directory": "dist/client"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "open-sheet",
+      "database_id": "621a4171-7e7b-4aa7-89e9-e3076c8ebb4c",
+      "migrations_dir": "drizzle"
+    }
+  ]
+}
