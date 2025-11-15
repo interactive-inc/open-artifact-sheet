@@ -1,0 +1,25 @@
+export const COLUMN_TYPES = {
+  TEXT: "TEXT",
+  TEXT_MULTI_LINE: "TEXT_MULTI_LINE",
+  TEXT_MULTI_SELECT: "TEXT_MULTI_SELECT",
+  TEXT_SELECT: "TEXT_SELECT",
+  TEXT_URL: "TEXT_URL",
+  DATE: "DATE",
+  DATE_TIME: "DATE_TIME",
+  NUMBER: "NUMBER",
+  BOOLEAN: "BOOLEAN",
+} as const
+
+export type ColumnType = (typeof COLUMN_TYPES)[keyof typeof COLUMN_TYPES]
+
+export const COLUMN_TYPE_LABELS: Record<ColumnType, string> = {
+  [COLUMN_TYPES.TEXT]: "Text",
+  [COLUMN_TYPES.TEXT_MULTI_LINE]: "Multi-line Text",
+  [COLUMN_TYPES.TEXT_MULTI_SELECT]: "Multi-select",
+  [COLUMN_TYPES.TEXT_SELECT]: "Select",
+  [COLUMN_TYPES.TEXT_URL]: "URL",
+  [COLUMN_TYPES.DATE]: "Date",
+  [COLUMN_TYPES.DATE_TIME]: "Date Time",
+  [COLUMN_TYPES.NUMBER]: "Number",
+  [COLUMN_TYPES.BOOLEAN]: "Boolean",
+}

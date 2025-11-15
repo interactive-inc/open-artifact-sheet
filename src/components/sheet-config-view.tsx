@@ -2,6 +2,7 @@ import type { UseQueryResult } from "@tanstack/react-query"
 import { useMutation } from "@tanstack/react-query"
 import { PlusIcon } from "lucide-react"
 import { use, useState } from "react"
+import { SheetColumnConfigCard } from "@/components/sheet-column-config-card"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -17,14 +18,6 @@ export function SheetConfigView(props: Props) {
   const sheet = use(props.query.promise)
 
   const [tableName, setTableName] = useState(sheet.name)
-
-  const [columnNames, setColumnNames] = useState<Record<string, string>>(
-    Object.fromEntries(
-      sheet.columns.map((col) => {
-        return [col.id, col.name]
-      }),
-    ),
-  )
 
   const updateTableMutation = useMutation({
     async mutationFn(data: { tableId: string; name: string }) {
@@ -59,46 +52,13 @@ export function SheetConfigView(props: Props) {
     },
   })
 
-  const updateColumnMutation = useMutation({
-    async mutationFn(data: { columnId: string; name: string }) {
-      const response = await client.api.columns[":id"].$patch({
-        param: {
-          id: data.columnId,
-        },
-        json: {
-          name: data.name,
-        },
-      })
-      return response.json()
-    },
-    async onSuccess() {
-      await props.query.refetch()
-      props.onChange()
-    },
-  })
-
-  const deleteColumnMutation = useMutation({
-    async mutationFn(data: { columnId: string }) {
-      const response = await client.api.columns[":id"].$delete({
-        param: {
-          id: data.columnId,
-        },
-      })
-      return response.json()
-    },
-    async onSuccess() {
-      await props.query.refetch()
-      props.onChange()
-    },
-  })
-
   const addColumnMutation = useMutation({
     async mutationFn(data: { tableId: string; name: string; order: number }) {
       const response = await client.api.columns.$post({
         json: {
           tableId: data.tableId,
           name: data.name,
-          type: "text",
+          type: "TEXT",
           order: data.order,
         },
       })
@@ -120,21 +80,6 @@ export function SheetConfigView(props: Props) {
     if (confirm("Delete this table?")) {
       deleteTableMutation.mutate({
         tableId: sheet.id,
-      })
-    }
-  }
-
-  const onSaveColumn = (columnId: string) => {
-    updateColumnMutation.mutate({
-      columnId: columnId,
-      name: columnNames[columnId],
-    })
-  }
-
-  const onDeleteColumn = (columnId: string) => {
-    if (confirm("Delete this column?")) {
-      deleteColumnMutation.mutate({
-        columnId: columnId,
       })
     }
   }
@@ -177,52 +122,14 @@ export function SheetConfigView(props: Props) {
         <h2 className="font-bold">Columns</h2>
         <div className="space-y-2">
           {sheet.columns.map((column) => (
-            <Card
+            <SheetColumnConfigCard
               key={column.id}
-              className={"flex flex-col gap-2 rounded-2xl p-4 shadow-none"}
-            >
-              <div className={"text-sm"}>{column.id}</div>
-              <div className={"flex items-center gap-2"}>
-                <Input
-                  className={"flex-1 rounded-full shadow-none"}
-                  value={columnNames[column.id]}
-                  onChange={(event) => {
-                    setColumnNames({
-                      ...columnNames,
-                      [column.id]: event.target.value,
-                    })
-                  }}
-                  onKeyDown={(event) => {
-                    if (event.key === "Enter") {
-                      onSaveColumn(column.id)
-                    }
-                  }}
-                />
-                <Button
-                  className="rounded-full"
-                  size="sm"
-                  onClick={() => {
-                    return onSaveColumn(column.id)
-                  }}
-                  disabled={
-                    !columnNames[column.id] || updateColumnMutation.isPending
-                  }
-                >
-                  {"Save"}
-                </Button>
-                <Button
-                  className="rounded-full"
-                  size="sm"
-                  variant="secondary"
-                  onClick={() => {
-                    return onDeleteColumn(column.id)
-                  }}
-                  disabled={deleteColumnMutation.isPending}
-                >
-                  {"Delete"}
-                </Button>
-              </div>
-            </Card>
+              column={column}
+              onChange={async () => {
+                await props.query.refetch()
+                props.onChange()
+              }}
+            />
           ))}
           <Button
             className={"w-full rounded-full shadow-none"}

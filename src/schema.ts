@@ -27,6 +27,7 @@ export const columns = sqliteTable("columns", {
   name: text("name").notNull(),
   type: text("type").notNull().default("text"),
   order: integer("order").notNull(),
+  options: text("options"),
   deletedAt: integer("deleted_at", { mode: "timestamp" }),
   createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
   updatedAt: integer("updated_at", { mode: "timestamp" }).notNull(),

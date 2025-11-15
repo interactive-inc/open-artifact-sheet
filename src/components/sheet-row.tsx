@@ -51,18 +51,16 @@ export function SheetRow(props: Props) {
   return (
     <TableRow key={props.row.id} className={"border-dashed"}>
       <TableCell className={"pr-1 pl-4 align-top"}>
-        <div className={"flex items-center gap-2"}>
-          <Button
-            size={"sm"}
-            variant={"outline"}
-            className={"rounded-full border-dashed shadow-none"}
-            onClick={onDeleteRow}
-            disabled={deleteRowMutation.isPending}
-          >
-            <XIcon className={"size-4"} />
-            {props.row.id.split("-")[0]}
-          </Button>
-        </div>
+        <Button
+          size={"sm"}
+          variant={"outline"}
+          className={"rounded-full border-dashed shadow-none"}
+          onClick={onDeleteRow}
+          disabled={deleteRowMutation.isPending}
+        >
+          <XIcon className={"size-4"} />
+          {props.row.id.split("-")[0]}
+        </Button>
       </TableCell>
       {props.columns.map((column, columnIndex) => {
         const cell = props.row.cells.find((cellItem) => {
@@ -76,7 +74,7 @@ export function SheetRow(props: Props) {
             })}
           >
             <SheetCellInput
-              type={column.type}
+              column={column}
               rowId={props.row.id}
               columnId={column.id}
               value={cell ?? null}

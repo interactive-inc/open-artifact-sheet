@@ -18,6 +18,7 @@ export const POST = factory.createHandlers(
       name: z.string(),
       type: z.string().default("text"),
       order: z.number(),
+      options: z.string().nullable().optional(),
     }),
   ),
   async (c) => {
@@ -31,6 +32,7 @@ export const POST = factory.createHandlers(
       name: json.name,
       type: json.type,
       order: json.order,
+      options: json.options,
       createdAt: new Date(),
       updatedAt: new Date(),
     })
@@ -49,6 +51,7 @@ export const POST = factory.createHandlers(
       name: column.name,
       type: column.type,
       order: column.order,
+      options: column.options,
       deletedAt: column.deletedAt ? toUnixTime(column.deletedAt) : null,
       createdAt: toUnixTime(column.createdAt),
       updatedAt: toUnixTime(column.updatedAt),

@@ -18,6 +18,7 @@ export const PATCH = factory.createHandlers(
       name: z.string().optional(),
       type: z.string().optional(),
       order: z.number().optional(),
+      options: z.string().nullable().optional(),
     }),
   ),
   async (c) => {
@@ -31,6 +32,7 @@ export const PATCH = factory.createHandlers(
         name: json.name,
         type: json.type,
         order: json.order,
+        options: json.options,
         updatedAt: new Date(),
       })
       .where(eq(columns.id, param.id))
@@ -49,6 +51,7 @@ export const PATCH = factory.createHandlers(
       name: column.name,
       type: column.type,
       order: column.order,
+      options: column.options,
       deletedAt: column.deletedAt ? toUnixTime(column.deletedAt) : null,
       createdAt: toUnixTime(column.createdAt),
       updatedAt: toUnixTime(column.updatedAt),

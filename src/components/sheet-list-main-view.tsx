@@ -60,10 +60,10 @@ export function SheetListMainView(props: Props) {
   }
 
   return (
-    <div className={"flex"}>
+    <div className={"flex flex-col md:flex-row"}>
       <div
         className={
-          "sticky top-0 flex h-screen min-w-40 flex-col border-primary border-r border-dashed"
+          "top-0 flex min-w-40 flex-col border-primary border-b border-dashed md:sticky md:h-screen md:border-r md:border-b-0"
         }
       >
         <div

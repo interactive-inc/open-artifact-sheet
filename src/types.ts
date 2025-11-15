@@ -23,6 +23,7 @@ export type AppColumn = {
   name: string
   type: string
   order: number
+  options: string | null
   deletedAt: number | null
   createdAt: number
   updatedAt: number
