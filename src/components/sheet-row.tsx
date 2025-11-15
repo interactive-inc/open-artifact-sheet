@@ -69,7 +69,7 @@ export function SheetRow(props: Props) {
         return (
           <TableCell
             key={`${props.row.id}:${column.id}`}
-            className={cn("min-w-80 px-1 align-top", {
+            className={cn("min-w-40 px-1 align-top", {
               "pr-4": columnIndex === props.columns.length - 1,
             })}
           >

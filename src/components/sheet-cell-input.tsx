@@ -65,21 +65,15 @@ export function SheetCellInput(props: Props) {
     })
   }
 
-  const _onSelectChange = (newValue: string) => {
-    setValue(newValue)
-    mutation.mutate({
-      rowId: props.rowId,
-      columnId: props.columnId,
-      value: newValue,
-    })
-  }
-
   if (props.column.type === COLUMN_TYPES.TEXT_MULTI_LINE) {
     return (
       <Textarea
-        className={cn("rounded-2xl border-dashed shadow-none", {
-          "border-primary": value.length !== 0,
-        })}
+        className={cn(
+          "field-sizing-content w-max rounded-2xl border-dashed shadow-none",
+          {
+            "border-primary": value.length !== 0,
+          },
+        )}
         value={value}
         onBlur={onSave}
         onChange={(event) => {
@@ -280,22 +274,20 @@ export function SheetCellInput(props: Props) {
       <div className="flex flex-row gap-2">
         {selectedValues.length > 0 && (
           <div className="flex gap-1">
-            {selectedValues.map((selectedValue) => {
-              return (
-                <Button
-                  key={selectedValue}
-                  variant="secondary"
-                  size="sm"
-                  className="rounded-full text-xs"
-                  onClick={() => {
-                    return removeOption(selectedValue)
-                  }}
-                >
-                  {selectedValue}
-                  <span className="ml-1">×</span>
-                </Button>
-              )
-            })}
+            {selectedValues.map((selectedValue) => (
+              <Button
+                key={selectedValue}
+                variant="secondary"
+                size="sm"
+                className="rounded-full text-xs"
+                onClick={() => {
+                  return removeOption(selectedValue)
+                }}
+              >
+                {selectedValue}
+                <span className="ml-1">×</span>
+              </Button>
+            ))}
           </div>
         )}
         {availableOptions.length > 0 && (
@@ -316,13 +308,11 @@ export function SheetCellInput(props: Props) {
               <SelectValue placeholder="Add" />
             </SelectTrigger>
             <SelectContent>
-              {availableOptions.map((option) => {
-                return (
-                  <SelectItem key={option} value={option}>
-                    {option}
-                  </SelectItem>
-                )
-              })}
+              {availableOptions.map((option) => (
+                <SelectItem key={option} value={option}>
+                  {option}
+                </SelectItem>
+              ))}
             </SelectContent>
           </Select>
         )}
@@ -332,9 +322,12 @@ export function SheetCellInput(props: Props) {
 
   return (
     <Input
-      className={cn("rounded-full border-dashed shadow-none", {
-        "border-primary": value.length !== 0,
-      })}
+      className={cn(
+        "field-sizing-content rounded-full border-dashed shadow-none",
+        {
+          "border-primary": value.length !== 0,
+        },
+      )}
       value={value}
       onBlur={onSave}
       onChange={(event) => {
