@@ -14,7 +14,7 @@
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "open-sheet",
+      "database_name": "open-artifact-sheet",
       "database_id": "621a4171-7e7b-4aa7-89e9-e3076c8ebb4c",
       "migrations_dir": "drizzle"
     }
