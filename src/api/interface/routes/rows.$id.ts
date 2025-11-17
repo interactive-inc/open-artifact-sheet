@@ -56,15 +56,18 @@ export const PATCH = factory.createHandlers(
 /**
  * DELETE /rows/:id - Delete row
  */
-export const DELETE = factory.createHandlers(async (c) => {
-  const param = c.req.valid("param")
+export const DELETE = factory.createHandlers(
+  zValidator("param", z.object({ id: z.string() })),
+  async (c) => {
+    const param = c.req.valid("param")
 
-  await c.var.database
-    .update(rows)
-    .set({
-      deletedAt: new Date(),
-    })
-    .where(eq(rows.id, param.id))
+    await c.var.database
+      .update(rows)
+      .set({
+        deletedAt: new Date(),
+      })
+      .where(eq(rows.id, param.id))
 
-  return c.json({ success: true })
-})
+    return c.json({ success: true })
+  },
+)

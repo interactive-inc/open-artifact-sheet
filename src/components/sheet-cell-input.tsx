@@ -69,10 +69,8 @@ export function SheetCellInput(props: Props) {
     return (
       <Textarea
         className={cn(
-          "field-sizing-content w-max rounded-2xl border-dashed shadow-none",
-          {
-            "border-primary": value.length !== 0,
-          },
+          "field-sizing-content w-full rounded-2xl border-dashed shadow-none",
+          { "border-primary": value.length !== 0 },
         )}
         value={value}
         onBlur={onSave}

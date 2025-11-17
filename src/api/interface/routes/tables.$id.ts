@@ -18,7 +18,12 @@ export const GET = factory.createHandlers(
     const table = await c.var.database.query.tables.findFirst({
       where: eq(schema.tables.id, param.id),
       with: {
-        rows: { with: { cells: true } },
+        rows: {
+          where(row, o) {
+            return o.isNull(row.deletedAt)
+          },
+          with: { cells: true },
+        },
         columns: {
           where(column, o) {
             return o.isNull(column.deletedAt)
@@ -108,9 +113,15 @@ export const PATCH = factory.createHandlers(
       where: eq(schema.tables.id, param.id),
       with: {
         columns: {
+          where(column, o) {
+            return o.isNull(column.deletedAt)
+          },
           orderBy: asc(schema.tables.order),
         },
         rows: {
+          where(row, o) {
+            return o.isNull(row.deletedAt)
+          },
           orderBy: asc(schema.rows.order),
           with: { cells: true },
         },
