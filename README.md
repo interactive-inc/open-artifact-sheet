@@ -33,4 +33,6 @@ make update-packages
 vp lint
 vp fmt
 vp test
+vp run check
+vp build
 ```

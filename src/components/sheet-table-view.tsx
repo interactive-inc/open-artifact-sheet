@@ -4,8 +4,7 @@ import { PlusIcon } from "lucide-react"
 import { use } from "react"
 import { SheetRow } from "@/components/sheet-row"
 import { Button } from "@/components/ui/button"
-import { TableBody, TableCell, TableHead } from "@/components/ui/table"
-import { CustomTableRow } from "@/components/ui-custom/custom-table-row"
+import { TableBody, TableCell, TableHead, TableRow } from "@/components/ui/table"
 import { client } from "@/lib/client"
 import { env } from "@/lib/env"
 import { cn } from "@/lib/utils"
@@ -48,7 +47,7 @@ export function SheetTableView(props: Props) {
       <table data-slot="table" className={"w-full caption-bottom text-sm"}>
         <thead data-slot="table-header" className="sticky top-0 z-40 bg-background">
           <tr className="absolute bottom-0 left-0 w-full border-primary border-b border-dashed" />
-          <CustomTableRow>
+          <TableRow className="border-0 hover:bg-transparent">
             <TableHead className="pl-4">{"ID"}</TableHead>
             {table.columns.map((column, columnIndex) => (
               <TableHead
@@ -60,7 +59,7 @@ export function SheetTableView(props: Props) {
                 {column.name}
               </TableHead>
             ))}
-          </CustomTableRow>
+          </TableRow>
         </thead>
         <TableBody>
           {table.rows.map((row, rowIndex) => (
