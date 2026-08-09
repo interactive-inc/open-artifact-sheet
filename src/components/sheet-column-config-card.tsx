@@ -81,8 +81,7 @@ export function SheetColumnConfigCard(props: Props) {
     },
   })
 
-  const needsOptions =
-    type === COLUMN_TYPES.TEXT_SELECT || type === COLUMN_TYPES.TEXT_MULTI_SELECT
+  const needsOptions = type === COLUMN_TYPES.TEXT_SELECT || type === COLUMN_TYPES.TEXT_MULTI_SELECT
 
   const onSave = () => {
     const optionsString = options.length > 0 ? options.join(", ") : null
@@ -187,10 +186,7 @@ export function SheetColumnConfigCard(props: Props) {
               variant={"outline"}
               className={"rounded-full shadow-none"}
               onClick={() => {
-                const newOptions = [
-                  ...options,
-                  crypto.randomUUID().split("-")[0],
-                ]
+                const newOptions = [...options, crypto.randomUUID().split("-")[0]]
                 setOptions(newOptions)
               }}
             >

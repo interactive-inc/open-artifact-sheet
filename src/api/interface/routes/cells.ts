@@ -23,10 +23,7 @@ export const POST = factory.createHandlers(
     const json = c.req.valid("json")
 
     const existingCell = await c.var.database.query.cells.findFirst({
-      where: and(
-        eq(cells.rowId, json.rowId),
-        eq(cells.columnId, json.columnId),
-      ),
+      where: and(eq(cells.rowId, json.rowId), eq(cells.columnId, json.columnId)),
     })
 
     if (existingCell) {

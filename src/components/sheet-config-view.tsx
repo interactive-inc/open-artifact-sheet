@@ -144,13 +144,9 @@ export function SheetConfigView(props: Props) {
       </div>
       <Card className={"gap-y-4 rounded-2xl p-4 shadow-none"}>
         <div>
-          <h2 className={"font-bold text-destructive"}>
-            {"Dangerous Operation"}
-          </h2>
+          <h2 className={"font-bold text-destructive"}>{"Dangerous Operation"}</h2>
           <p className="text-muted-foreground text-sm">
-            {
-              "This table and all data will be deleted. This action cannot be undone."
-            }
+            {"This table and all data will be deleted. This action cannot be undone."}
           </p>
         </div>
         <Button

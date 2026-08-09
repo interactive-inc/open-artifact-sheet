@@ -15,9 +15,7 @@ type Props = {
 export function SheetListMainView(props: Props) {
   const tables = use(props.query.promise)
 
-  const [sheetId, setSheetId] = useState<string | null>(
-    tables.length > 0 ? tables[0].id : null,
-  )
+  const [sheetId, setSheetId] = useState<string | null>(tables.length > 0 ? tables[0].id : null)
 
   const sheetQuery = useQuery({
     queryKey: ["tables", sheetId],
@@ -66,13 +64,9 @@ export function SheetListMainView(props: Props) {
           "top-0 flex min-w-40 flex-col border-primary border-b border-dashed md:sticky md:h-screen md:border-r md:border-b-0"
         }
       >
-        <div
-          className={"relative flex items-start justify-start gap-2 px-4 py-4"}
-        >
+        <div className={"relative flex items-start justify-start gap-2 px-4 py-4"}>
           <HomeButton isHome={false} />
-          <div
-            className={"absolute bottom-0 left-0 w-full border-b border-dashed"}
-          />
+          <div className={"absolute bottom-0 left-0 w-full border-b border-dashed"} />
         </div>
         <div className={"flex flex-col gap-y-2 p-4"}>
           {tables.map((table, _tableIndex) => (
@@ -99,11 +93,7 @@ export function SheetListMainView(props: Props) {
       <div className="flex-1">
         {sheetId !== null && (
           <Suspense fallback={<div className="p-4">Loading...</div>}>
-            <SheetConfigView
-              key={sheetId}
-              query={sheetQuery}
-              onChange={onChange}
-            />
+            <SheetConfigView key={sheetId} query={sheetQuery} onChange={onChange} />
           </Suspense>
         )}
       </div>

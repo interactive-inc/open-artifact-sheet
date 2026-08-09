@@ -4,27 +4,33 @@ https://developers.cloudflare.com/workers/framework-guides/web-apps/tanstack/
 
 ## Develop
 
-以下のコマンドを実行します。
-
-```
-$ bun i
-$ make apply-migration-local
-$ bun run dev
+```bash
+vp install
+make apply-migration-local
+vp dev
 ```
 
 ## マイグレーションを実行する
 
 以下のコマンドを実行します。
 
-```
-$ make create-migration
-$ make apply-migration-local
+```bash
+make create-migration
+make apply-migration-local
 ```
 
 ## パッケージを更新する
 
 以下のコマンドを実行します。
 
+```bash
+make update-packages
 ```
-$ make update-packages
+
+## 検証
+
+```bash
+vp lint
+vp fmt
+vp test
 ```

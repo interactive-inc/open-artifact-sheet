@@ -15,8 +15,7 @@ type Props = {
 export function HomeMainView(props: Props) {
   const tables = use(props.tablesQuery.promise)
 
-  const sheetId =
-    props.selectedTableId || (tables.length > 0 ? tables[0].id : null)
+  const sheetId = props.selectedTableId || (tables.length > 0 ? tables[0].id : null)
 
   const query = useQuery({
     enabled: sheetId !== null,

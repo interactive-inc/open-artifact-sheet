@@ -32,11 +32,7 @@ export function SheetCellInput(props: Props) {
   const [value, setValue] = useState(props.value?.value || "")
 
   const mutation = useMutation({
-    async mutationFn(data: {
-      rowId: string
-      columnId: string
-      value: string | null
-    }) {
+    async mutationFn(data: { rowId: string; columnId: string; value: string | null }) {
       const response = await client.api.cells.$post({
         json: data,
       })
@@ -68,10 +64,9 @@ export function SheetCellInput(props: Props) {
   if (props.column.type === COLUMN_TYPES.TEXT_MULTI_LINE) {
     return (
       <Textarea
-        className={cn(
-          "field-sizing-content w-full rounded-2xl border-dashed shadow-none",
-          { "border-primary": value.length !== 0 },
-        )}
+        className={cn("field-sizing-content w-full rounded-2xl border-dashed shadow-none", {
+          "border-primary": value.length !== 0,
+        })}
         value={value}
         onBlur={onSave}
         onChange={(event) => {
@@ -148,10 +143,7 @@ export function SheetCellInput(props: Props) {
   if (props.column.type === COLUMN_TYPES.BOOLEAN) {
     return (
       <div className="flex items-center justify-center p-2">
-        <Checkbox
-          checked={value === "TRUE"}
-          onCheckedChange={onBooleanChange}
-        />
+        <Checkbox checked={value === "TRUE"} onCheckedChange={onBooleanChange} />
       </div>
     )
   }
@@ -320,12 +312,9 @@ export function SheetCellInput(props: Props) {
 
   return (
     <Input
-      className={cn(
-        "field-sizing-content rounded-full border-dashed shadow-none",
-        {
-          "border-primary": value.length !== 0,
-        },
-      )}
+      className={cn("field-sizing-content rounded-full border-dashed shadow-none", {
+        "border-primary": value.length !== 0,
+      })}
       value={value}
       onBlur={onSave}
       onChange={(event) => {

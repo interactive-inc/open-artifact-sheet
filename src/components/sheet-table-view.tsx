@@ -44,15 +44,9 @@ export function SheetTableView(props: Props) {
   }
 
   return (
-    <div
-      className="overflow-x-auto"
-      style={{ height: `calc(100svh - ${env.headerHeight}px)` }}
-    >
+    <div className="overflow-x-auto" style={{ height: `calc(100svh - ${env.headerHeight}px)` }}>
       <table data-slot="table" className={"w-full caption-bottom text-sm"}>
-        <thead
-          data-slot="table-header"
-          className="sticky top-0 z-40 bg-background"
-        >
+        <thead data-slot="table-header" className="sticky top-0 z-40 bg-background">
           <tr className="absolute bottom-0 left-0 w-full border-primary border-b border-dashed" />
           <CustomTableRow>
             <TableHead className="pl-4">{"ID"}</TableHead>
